@@ -438,6 +438,7 @@ section {
     border: 1px solid #d2d6dc;
     border-radius: 22px;
     padding: clamp(1.5rem, 3vw, 2rem);
+    text-decoration: none;
     transition:
         border-color 0.2s ease,
         transform 0.2s ease;
@@ -445,7 +446,13 @@ section {
 
 .project-pod:hover {
     border-color: #ffffff;
+    color: #111318;
     transform: translateY(-2px);
+}
+
+.project-pod:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 3px;
 }
 
 .project-pod h3 {
@@ -500,15 +507,10 @@ section {
     white-space: nowrap;
 }
 
-.project-pod__cta:hover {
+.project-pod:hover .project-pod__cta {
     background-color: #292e37;
     color: #ffffff !important;
     transform: translateX(2px);
-}
-
-.project-pod__cta:focus-visible {
-    outline: 2px solid #ffffff;
-    outline-offset: 3px;
 }
 
 .project-pod__arrow {

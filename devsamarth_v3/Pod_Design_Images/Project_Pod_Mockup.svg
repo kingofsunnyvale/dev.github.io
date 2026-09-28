@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1080" viewBox="0 0 1440 1080" role="img" aria-labelledby="title description">
+  <title id="title">Proposed project pod design</title>
+  <desc id="description">A near-black portfolio page with a projects heading and three compact light-gray project pods. Each pod has a title, description, technology tags, and an outlined View project button with a white circular arrow.</desc>
+  <rect width="1440" height="1080" fill="#0c0c0c"/>
+  <rect x="0" width="10" height="1080" fill="#0d0d0d"/>
+  <rect x="1430" width="10" height="1080" fill="#0d0d0d"/>
+
+  <g font-family="Roboto, Arial, sans-serif">
+    <text x="270" y="118" fill="#ffffff" font-size="28" font-weight="700">projects</text>
+    <line x1="270" y1="145" x2="1170" y2="145" stroke="#ffffff" stroke-width="1"/>
+    <text x="270" y="183" fill="#9a9a9a" font-size="15">Proposed desktop pod treatment</text>
+
+    <g transform="translate(270 220)">
+      <rect width="900" height="202" rx="22" fill="#e9ebef" stroke="#d2d6dc"/>
+      <text x="32" y="53" fill="#15171b" font-size="27" font-weight="700">DEVim</text>
+      <text x="32" y="88" fill="#424750" font-size="17">A custom Neovim distribution with a focus on developer</text>
+      <text x="32" y="113" fill="#424750" font-size="17">experience and productivity.</text>
+
+      <g font-size="14" font-weight="600">
+        <rect x="32" y="143" width="75" height="28" rx="14" fill="#e0e7ff"/>
+        <text x="48" y="162" fill="#283b67">Neovim</text>
+        <rect x="116" y="143" width="49" height="28" rx="14" fill="#e0e7ff"/>
+        <text x="132" y="162" fill="#283b67">Lua</text>
+        <rect x="174" y="143" width="67" height="28" rx="14" fill="#e0e7ff"/>
+        <text x="190" y="162" fill="#283b67">GitHub</text>
+        <rect x="250" y="143" width="76" height="28" rx="14" fill="#e0e7ff"/>
+        <text x="266" y="162" fill="#283b67">Vimscript</text>
+      </g>
+
+      <g transform="translate(684 125)">
+        <rect width="184" height="52" rx="26" fill="#111318" stroke="#ffffff"/>
+        <text x="24" y="33" fill="#ffffff" font-size="17" font-weight="700">View project</text>
+        <text x="153" y="33" fill="#ffffff" font-size="20" font-weight="700">&gt;</text>
+      </g>
+    </g>
+
+    <g transform="translate(270 442)">
+      <rect width="900" height="202" rx="22" fill="#e9ebef" stroke="#d2d6dc"/>
+      <text x="32" y="53" fill="#15171b" font-size="27" font-weight="700">RepoRecall AI</text>
+      <text x="32" y="88" fill="#424750" font-size="17">A web application that uses machine learning to recommend</text>
+      <text x="32" y="113" fill="#424750" font-size="17">GitHub repositories based on a user's goals and preferences.</text>
+
+      <g font-size="14" font-weight="600">
+        <rect x="32" y="143" width="91" height="28" rx="14" fill="#e0e7ff"/>
+        <text x="48" y="162" fill="#283b67">TypeScript</text>
+        <rect x="132" y="143" width="92" height="28" rx="14" fill="#e0e7ff"/>
+        <text x="148" y="162" fill="#283b67">JavaScript</text>
+        <rect x="233" y="143" width="49" height="28" rx="14" fill="#e0e7ff"/>
+        <text x="250" y="162" fill="#283b67">CSS</text>
+        <rect x="291" y="143" width="56" height="28" rx="14" fill="#e0e7ff"/>
+        <text x="307" y="162" fill="#283b67">HTML</text>
+        <rect x="356" y="143" width="59" height="28" rx="14" fill="#e0e7ff"/>
+        <text x="372" y="162" fill="#283b67">React</text>
+      </g>
+
+      <g transform="translate(684 125)">
+        <rect width="184" height="52" rx="26" fill="#111318" stroke="#ffffff"/>
+        <text x="24" y="33" fill="#ffffff" font-size="17" font-weight="700">View project</text>
+        <text x="153" y="33" fill="#ffffff" font-size="20" font-weight="700">&gt;</text>
+      </g>
+    </g>
+
+    <g transform="translate(270 664)">
+      <rect width="900" height="202" rx="22" fill="#e9ebef" stroke="#d2d6dc"/>
+      <text x="32" y="53" fill="#15171b" font-size="27" font-weight="700">Personal Portfolio Repo</text>
+      <text x="32" y="88" fill="#424750" font-size="17">A personal portfolio website to showcase my projects and skills.</text>
+
+      <g font-size="14" font-weight="600">
+        <rect x="32" y="143" width="92" height="28" rx="14" fill="#e0e7ff"/>
+        <text x="48" y="162" fill="#283b67">JavaScript</text>
+        <rect x="133" y="143" width="49" height="28" rx="14" fill="#e0e7ff"/>
+        <text x="150" y="162" fill="#283b67">CSS</text>
+        <rect x="191" y="143" width="56" height="28" rx="14" fill="#e0e7ff"/>
+        <text x="207" y="162" fill="#283b67">HTML</text>
+        <rect x="256" y="143" width="59" height="28" rx="14" fill="#e0e7ff"/>
+        <text x="272" y="162" fill="#283b67">React</text>
+      </g>
+
+      <g transform="translate(684 125)">
+        <rect width="184" height="52" rx="26" fill="#111318" stroke="#ffffff"/>
+        <text x="24" y="33" fill="#ffffff" font-size="17" font-weight="700">View project</text>
+        <text x="153" y="33" fill="#ffffff" font-size="20" font-weight="700">&gt;</text>
+      </g>
+    </g>
+
+    <text x="270" y="934" fill="#9a9a9a" font-size="15">Light-gray cards and spacing follow Cresta; compact hierarchy follows Decagon.</text>
+    <text x="270" y="962" fill="#9a9a9a" font-size="15">On mobile, the CTA moves below the tags while preserving its outlined pill treatment.</text>
+  </g>
+</svg>

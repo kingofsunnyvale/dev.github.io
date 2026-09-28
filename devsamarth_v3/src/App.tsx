@@ -209,7 +209,14 @@ function App() {
           </div>
           <div className="project-pods">
             {dataportfolio.map((project) => (
-              <article className="project-pod" key={project.url}>
+              <a
+                className="project-pod"
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                key={project.url}
+                aria-label={`Open ${project.title} project in a new tab`}
+              >
                 <div className="project-pod__content">
                   <h3>{project.title}</h3>
                   <p>{project.description}</p>
@@ -219,19 +226,13 @@ function App() {
                     ))}
                   </ul>
                 </div>
-                <a
-                  className="project-pod__cta"
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Open ${project.title} project in a new tab`}
-                >
+                <span className="project-pod__cta">
                   <span>View project</span>
                   <span className="project-pod__arrow" aria-hidden="true">
                     &gt;
                   </span>
-                </a>
-              </article>
+                </span>
+              </a>
             ))}
           </div>
         </Container>
