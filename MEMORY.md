@@ -1,5 +1,11 @@
 # Memory
 
+2026-09-29 — Cube diagonal direction corrected
+---
+- Samarth requested upper-left-to-lower-right rotation and authorized a local commit without pushing. Changed the rotation axis in `devsamarth_v3/src/App.css` from `(1, 1, 0)` to `(-1, 1, 0)`.
+- Local Chromium measurements confirmed the front face moves right and down. The cube is still 22px with a 10-second rotation, and reduced motion disables the animation.
+- `bun run build` and the CSS diff-check passed; local browser inspection reported no page errors. The task's Bun/Vite server on port 5180 was stopped. Existing edits in `src/App.tsx` and `src/pages.tsx` belong to the user and are excluded from this commit.
+
 2026-09-28 — Cube motion refinement
 ---
 - Samarth requested a smaller cube with a faster diagonal rotation. Updated `devsamarth_v3/src/App.css`: 22px sides (previously 26px), a 10-second loop (previously 18 seconds), and `rotate3d(1, 1, 0, ...)` for diagonal-axis rotation.

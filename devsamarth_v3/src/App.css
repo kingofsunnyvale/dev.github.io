@@ -81,8 +81,8 @@ main:focus, #page-title:focus { outline: none; }
 .cube-face--bottom { background: var(--ink); transform: rotateX(-90deg) translateZ(11px); }
 .cube-ground { position: absolute; left: 11px; bottom: 10px; width: 26px; height: 1px; background: var(--line); }
 @keyframes cube-rotate {
-    from { transform: rotate3d(1, 1, 0, 0deg) rotateX(-24deg) rotateY(35deg); }
-    to { transform: rotate3d(1, 1, 0, 360deg) rotateX(-24deg) rotateY(35deg); }
+    from { transform: rotate3d(-1, 1, 0, 0deg) rotateX(-24deg) rotateY(35deg); }
+    to { transform: rotate3d(-1, 1, 0, 360deg) rotateX(-24deg) rotateY(35deg); }
 }
 
 .biography p + p { margin-top: 20px; }
