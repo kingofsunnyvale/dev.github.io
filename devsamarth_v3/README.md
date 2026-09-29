@@ -41,9 +41,13 @@ The cube rotates with CSS. For ordinary same-tab links, navigation waits for its
 browser history, and standard modifier-click/new-tab behaviour are supported.
 Reduced-motion preferences stop rotation and make navigation immediate.
 
-IBM Plex Sans is served locally from `public/plex-sans-latin.woff2`; its SIL Open
-Font License is included in `public/plex-OFL.txt`. No font service is contacted
+Inter is served locally from `public/inter-latin.woff2`; its SIL Open
+Font License is included in `public/inter-OFL.txt`. No font service is contacted
 by visitors.
+
+Text follows benji.org's compact typography: a 550px reading column, 14px Inter
+at weight 460, a 20px line height, and 16px paragraph gaps. Markdown prose
+inherits these global settings.
 
 ## Publish a blog post
 

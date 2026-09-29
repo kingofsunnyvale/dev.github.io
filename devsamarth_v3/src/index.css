@@ -1,8 +1,8 @@
 @font-face {
-    font-family: "Plex Sans";
-    src: url("/plex-sans-latin.woff2") format("woff2");
+    font-family: "Inter";
+    src: url("/inter-latin.woff2") format("woff2");
     font-style: normal;
-    font-weight: 400 500;
+    font-weight: 400 700;
     font-display: swap;
 }
 
@@ -14,10 +14,12 @@
     --body: #565656;
     --muted: #707070;
     --line: #d6d6d6;
-    --font-body: "Plex Sans", "Helvetica Neue", sans-serif;
+    --text: #111111;
+    --text-muted: rgba(0, 0, 0, 0.4);
+    --font-body: "Inter", "Helvetica Neue", sans-serif;
     --font-utility: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
     font-family: var(--font-body);
-    color: var(--ink);
+    color: var(--text);
     background: var(--paper);
     font-synthesis: none;
     -webkit-font-smoothing: antialiased;
@@ -29,15 +31,18 @@
 body {
     margin: 0;
     min-width: 280px;
-    font-size: 16px;
-    line-height: 1.75;
+    font-size: 0.875rem;
+    font-weight: 460;
+    line-height: 1.25rem;
+    letter-spacing: -0.00563rem;
 }
 
 ::selection { color: var(--paper); background: var(--body); }
 
 h1, h2, h3, p, ul, ol { margin: 0; }
-h1, h2, h3 { font-weight: 500; }
-p { color: var(--body); }
+h1, h2, h3 { font-size: inherit; font-weight: 500; line-height: inherit; }
+p { color: inherit; }
+strong { font-weight: 600; }
 
 a {
     color: inherit;

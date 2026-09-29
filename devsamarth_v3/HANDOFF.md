@@ -14,9 +14,12 @@ This section supersedes the historical notes below for the website revamp.
   cube, 320 ms jump-before-navigation, route selection, metadata, and footer.
 - `src/pages.tsx` renders Home, Work, Products, Blog, Markdown articles, and
   missing-page content. Existing portfolio text stays in `src/content.tsx`.
-- `src/index.css` supplies the monochrome tokens and locally served IBM Plex Sans;
+- `src/index.css` supplies the monochrome tokens and locally served Inter;
   `src/App.css` supplies layout and the responsive interface. The old Bootstrap,
   portrait, typewriter, and project-pod UI have been replaced.
+- Typography matches benji.org: a 550px reading column, 14px/20px Inter at weight
+  460, 14px page titles at weight 500, and 16px paragraph gaps. Markdown prose
+  inherits the global type settings; code retains the utility font.
 - Markdown posts live in `src/posts`. The draft template is unpublished.
   `vite.config.ts` parses front matter with `Bun.YAML.parse`, sorts posts by date,
   provides `virtual:posts`, and writes static HTML entry files for deep links.
