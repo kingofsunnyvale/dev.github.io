@@ -23,15 +23,15 @@ function App() {
     "/": { title: introdata.title, description: introdata.title2 },
     "/work": {
       title: "Work",
-      description: "A timeline of my work in product, engineering, and research.",
+      description: "Timeline of my work in product, engineering, and research.",
     },
     "/products": {
       title: "Products",
-      description: "Projects, tools, and things I've built along the way.",
+      description: "Products, projects, tools, and things I've built along the way.",
     },
     "/blog": {
       title: "Blog",
-      description: "Notes on what I'm working on, learning, and thinking about.",
+      description: "What I'm working, learning, and thinking about.",
     },
   }[path] ?? {
     title: post?.title ?? "Page not found",

@@ -20,11 +20,11 @@ export function Home() {
       <ul className="contact-links" aria-label="Find me elsewhere">
         {links.map(({ label, href }) => <li key={label}><a href={href}>{label}</a></li>)}
       </ul>
-      <div className="directory" aria-label="Explore the website">
+      {/* <div className="directory" aria-label="Explore the website">
         <a href="/work"><span>Work</span><span className="directory-description">Experience & research</span><span aria-hidden="true">↗</span></a>
-        <a href="/products"><span>Products</span><span className="directory-description">Projects & open source</span><span aria-hidden="true">↗</span></a>
+        <a href="/products"><span>Products</span><span className="directory-description">Products & open source</span><span aria-hidden="true">↗</span></a>
         <a href="/blog"><span>Blog</span><span className="directory-description">Notes & writing</span><span aria-hidden="true">↗</span></a>
-      </div>
+      </div> */}
     </div>
   );
 }
