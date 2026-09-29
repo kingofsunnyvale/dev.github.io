@@ -1,5 +1,12 @@
-1. git add *
-2. git commit -m ""
-3. git push origin
-4. npm run build
-5. npm run deploy
+From the repository root (dev.github.io):
+
+1. bun install
+2. bun run build
+3. bun run deploy
+
+The deploy command runs gh-pages -d dist --nojekyll from devsamarth_v3 and publishes
+to the existing gh-pages branch. The flag disables Jekyll for the static output.
+The build retains public/CNAME (devsamarth.com)
+and generates static entry files for work, products, blog, and published posts.
+
+Commit and push source changes separately when you are ready.

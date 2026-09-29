@@ -1,4 +1,4 @@
-import sdevImage from "./assets/sdevCropped.jpg";
+import cv from "./assets/resume/Samarth Dev Resume.pdf";
 
 const logoText = "Samarth Dev";
 
@@ -10,22 +10,22 @@ const meta = {
 const introdata = {
   title: "Samarth Dev",
   title2: "Product Manager @ Five9",
-  animated: {
-    first: "Product Manager",
-    second: "Software Engineer",
-    third: "Machine Learning Engineer",
-    fourth: "Human Computer Interactions",
-    fifth: "AI Researcher",
-    sixth: "Tennis Player",
-    seventh: "Forza Ferrari",
-    eighth: "Forza Lewis Hamilton",
-  },
   description:
     "Currently working for Five9 as a Product Manager, handling our AI Solutions Products. Previously worked at a startup called AstroSeed as a Machine Learning Engineer where I created a recognition agent that can calculate the health of a plant; and AGI Inc. where I built out their entire infra for training and distilling models.",
   description2:
     "My hobbies include contributing to open-source projects, this includes DEVim, a custom Neovim distribution as well as tinkering with different Linux distros.",
-  your_img_url: sdevImage,
 };
+
+const links = [
+  { label: "CV", href: cv },
+  { label: "Email", href: "mailto:samarthdev138@gmail.com" },
+  { label: "GitHub", href: "https://github.com/sdev138" },
+  { label: "GitLab", href: "https://gitlab.com/samarthdev138" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/samarth-dev" },
+  { label: "Bluesky", href: "https://bsky.app/profile/samarthdev.bsky.social" },
+  { label: "Twitter", href: "https://x.com/chinnu_chan_" },
+  { label: "Google Scholar", href: "https://scholar.google.com/citations?user=ByJ5jz4AAAAJ&hl=en" },
+];
 
 const dataabout = {
   title: "research interests",
@@ -34,11 +34,6 @@ const dataabout = {
 };
 
 const worktimeline = [
-  // {
-  //   jobtitle: "Arizona State University",
-  //   where: "M.S. Computer Science",
-  //   date: "August 2025 - May 2027",
-  // },
   {
     jobtitle: "Arizona State University",
     where: "B.S. Computer Science",
@@ -48,19 +43,19 @@ const worktimeline = [
 
 const researcherExperience = [
   {
-    title: "National Security Innovation Network - Machine Learning Researcher",
+    title: "Machine Learning Researcher, NSIN",
     period: "January 2022 - May 2023",
     description:
       "Researched image classifiers that can determine the state of the exterior hull of a ship, and manage protocols of a ship increasing a crew's productivity and safety when in dangerous environments. This research was conducted as a partnership between Arizona State University and the United States Department of Defense",
   },
   {
-    title: "ASU - Student Researcher",
+    title: "Student Researcher, ASU",
     period: "August 2021 - December 2021",
     description:
       "Cooperated with the United States Navy to perform market research on viable, cost-effective products, that could assess damages to a ship and/or carrier, from a remote environment. Supervised by the Assistant Vice-President of Arizona State University and Former Senior Policy Advisor to the President of the United States, Drew Trojanowski.",
   },
   {
-    title: "ASU - Machine Learning Researcher",
+    title: "Machine Learning Researcher, ASU",
     period: "August 2021 - December 2021",
     description:
       "Implemented Twitter Developer API (TweePy, now called X) to predict and observe trends in volatile stock options. Calculated, discussed, and presented possible risks with stock based on personality than product.",
@@ -76,7 +71,7 @@ const workExperience = [
   },
   {
     title: "Software Engineer, Five9",
-    period: "Jun 2025 - May 2026",
+    period: "Jun 2025 - June 2026",
     description:
       "Working under Product Engineering at the AI Insights Team. Responsible for deploying models to different call centers, manage multiple microservices, and handle customer issues. Responsible for the deployment of Llama familty models, and many features for Gen AI Studio. Also the Service Owner for the Monolith Architecture & testing environment for AI Insights",
   },
@@ -183,6 +178,7 @@ export {
   researcherExperience,
   volunteeringExperience,
   introdata,
+  links,
   contactConfig,
   socialprofils,
   logoText,

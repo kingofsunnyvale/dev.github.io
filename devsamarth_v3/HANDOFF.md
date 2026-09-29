@@ -1,5 +1,37 @@
 # HANDOFF — devsamarth_v3 (Personal Website)
 
+## Current architecture — September 28, 2026
+
+This section supersedes the historical notes below for the website revamp.
+
+- The repo root is now the Bun workspace for the website. Run `bun install`,
+  `bun run dev`, `bun run lint`, and `bun run build` there. The old root
+  `index.ts` is not the website entry point.
+- The website remains React 18 + TypeScript + Vite, with the same
+  gh-pages deployment and `public/CNAME` (`devsamarth.com`). The deploy command
+  adds `--nojekyll` so gh-pages publishes the Jekyll opt-out file.
+- `src/App.tsx` owns the shared shell, white/grey menu navigation, rotating CSS
+  cube, 320 ms jump-before-navigation, route selection, metadata, and footer.
+- `src/pages.tsx` renders Home, Work, Products, Blog, Markdown articles, and
+  missing-page content. Existing portfolio text stays in `src/content.tsx`.
+- `src/index.css` supplies the monochrome tokens and locally served IBM Plex Sans;
+  `src/App.css` supplies layout and the responsive interface. The old Bootstrap,
+  portrait, typewriter, and project-pod UI have been replaced.
+- Markdown posts live in `src/posts`. The draft template is unpublished.
+  `vite.config.ts` parses front matter with `Bun.YAML.parse`, sorts posts by date,
+  provides `virtual:posts`, and writes static HTML entry files for deep links.
+- Samarth explicitly deferred shared blog-view counts. No backend is needed for
+  this version. Do not add fake/local-only counters.
+- See `README.md` in this app for authoring and deployment details, and
+  `../docs/superpowers/plans/2026-09-28-website-revamp.md` for the execution record.
+- Samarth requested no added tests; verification uses Bun build/lint and local
+  browser inspection. Shut down local servers after verification. Do not commit,
+  push, or deploy without permission.
+
+---
+
+## Historical handoff (pre-revamp)
+
 This document is a complete handoff. A new agent should be able to pick up from here
 without re-exploring the codebase. Read it fully before touching anything.
 

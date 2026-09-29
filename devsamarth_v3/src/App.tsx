@@ -1,249 +1,174 @@
-// import React from "react";
-// import { useState } from "react";
+import { useCallback, useEffect, useRef, useState, type MouseEvent } from "react";
+import posts from "virtual:posts";
+import { introdata, meta } from "./content";
+import { Home, Work, Products, Blog, BlogPost, NotFound } from "./pages";
 import "./App.css";
-import { Helmet, HelmetProvider } from "react-helmet-async";
-import Typewriter from "typewriter-effect";
-import sdevImage from "./assets/sdevCropped.jpg";
-import cv from "./assets/resume/Samarth Dev Resume.pdf";
 
-// about imports
-import { Container } from "react-bootstrap";
-import {
-  meta,
-  introdata,
-  dataabout,
-  dataportfolio,
-  worktimeline,
-  workExperience,
-  researcherExperience,
-  contactConfig,
-  volunteeringExperience,
-} from "./content.tsx";
+const navigation = [
+  { href: "/", label: "Home" },
+  { href: "/work", label: "Work" },
+  { href: "/products", label: "Products" },
+  { href: "/blog", label: "Blog" },
+];
+
+const currentPath = () => window.location.pathname.replace(/\/+$/, "") || "/";
 
 function App() {
+  const [path, setPath] = useState(currentPath);
+  const cube = useRef<HTMLDivElement>(null);
+  const animation = useRef<Animation | null>(null);
+  const previousPath = useRef(path);
+  const post = posts.find((entry) => path === `/blog/${entry.slug}`);
+  const page = {
+    "/": { title: introdata.title, description: introdata.title2 },
+    "/work": {
+      title: "Work",
+      description: "A timeline of my work in product, engineering, and research.",
+    },
+    "/products": {
+      title: "Products",
+      description: "Projects, tools, and things I've built along the way.",
+    },
+    "/blog": {
+      title: "Blog",
+      description: "Notes on what I'm working on, learning, and thinking about.",
+    },
+  }[path] ?? {
+    title: post?.title ?? "Page not found",
+    description: post?.description ?? "This page doesn't seem to be here.",
+  };
+
+  const jump = useCallback(async () => {
+    animation.current?.cancel();
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return true;
+
+    const next = cube.current?.animate(
+      [
+        { transform: "translateY(0)", easing: "cubic-bezier(.2,.7,.3,1)" },
+        { transform: "translateY(-28px)", offset: 0.42, easing: "cubic-bezier(.6,0,.9,.5)" },
+        { transform: "translateY(0)" },
+      ],
+      { duration: 320 },
+    );
+    if (!next) return true;
+    animation.current = next;
+    try {
+      await next.finished;
+      return true;
+    } catch {
+      // A newer navigation replaced this jump.
+      return false;
+    } finally {
+      if (animation.current === next) animation.current = null;
+    }
+  }, []);
+
+  useEffect(() => {
+    const onPopState = () => {
+      const destination = currentPath();
+      void jump().then((landed) => {
+        if (landed) setPath(destination);
+      });
+    };
+    window.addEventListener("popstate", onPopState);
+    return () => {
+      window.removeEventListener("popstate", onPopState);
+      animation.current?.cancel();
+    };
+  }, [jump]);
+
+  useEffect(() => {
+    document.title = path === "/" ? meta.title : `${page.title} — ${meta.title}`;
+    document.querySelector('meta[name="description"]')?.setAttribute(
+      "content", path === "/" ? meta.description : page.description,
+    );
+    document.querySelector('link[rel="canonical"]')?.setAttribute(
+      "href", `https://devsamarth.com${path === "/" ? "/" : path}`,
+    );
+    if (previousPath.current !== path) {
+      window.scrollTo({ top: 0, behavior: "instant" });
+      document.getElementById("page-title")?.focus({ preventScroll: true });
+      previousPath.current = path;
+    }
+  }, [path, page.title, page.description]);
+
+  function onLinkClick(event: MouseEvent<HTMLDivElement>) {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey ||
+        event.ctrlKey || event.shiftKey || event.altKey) return;
+    const link = event.target instanceof Element ? event.target.closest("a") : null;
+    if (!link || !link.hasAttribute("href") || link.hasAttribute("download") ||
+        (link.target && link.target !== "_self")) return;
+    const destination = new URL(link.href, window.location.href);
+    // In-page anchors (including the keyboard skip link) retain native scrolling.
+    if (destination.origin === window.location.origin &&
+        destination.pathname === window.location.pathname && destination.hash) return;
+
+    event.preventDefault();
+    void jump().then((landed) => {
+      if (!landed) return;
+      const localPage = destination.origin === window.location.origin &&
+        !/\.[^/]+$/.test(destination.pathname);
+      if (localPage) {
+        if (destination.href !== window.location.href) {
+          window.history.pushState(null, "", destination.href);
+        }
+        setPath(currentPath());
+      } else {
+        window.location.assign(destination.href);
+      }
+    });
+  }
+
   return (
-    <HelmetProvider>
-      <section id="home" className="home">
-        <Helmet>
-          <meta charSet="utf-8" />
-          <title> {meta.title}</title>
-          <meta name="description" content={meta.description} />
-        </Helmet>
-        <div className="intro_sec d-block d-lg-flex align-items-center ">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-6 text-container">
-                <div className="align-self-center">
-                  <div className="intro mx-auto">
-                    {/* Importing the self portrait to the front page */}
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <img
-                      alt="Samarth Portrait Image"
-                      src={sdevImage}
-                      style={{
-                        width: "128px",
-                        height: "128px",
-                        borderRadius: "50%",
-                        objectFit: "cover",
-                      }}
-                    />
-                    {/* Titles and descriptions */}
-                    <h1 className="mb-1x">{introdata.title}</h1>
-                    <h3 className="mb-1x">{introdata.title2}</h3>
-                    <br />
-                    <h1 className="fluidz-48 mb-1x">
-                      {/* Writing animation on the front page of the website */}
-                      <Typewriter
-                        options={{
-                          strings: [
-                            introdata.animated.first,
-                            introdata.animated.second,
-                            introdata.animated.third,
-                            introdata.animated.fourth,
-                            introdata.animated.fifth,
-                            introdata.animated.sixth,
-                            introdata.animated.seventh,
-                          ],
-                          autoStart: true,
-                          loop: true,
-                          deleteSpeed: 5,
-                        }}
-                      />
-                    </h1>
-                    <br />
-                    <p className="mb-1x">{introdata.description}</p>
-                    <p className="mb-1x">{introdata.description2}</p>
-                    {/* paragraph element is for the links */}
-                    <p className="mb-1x">
-                      <u>
-                        <a href={cv} target="_blank" rel="noopener noreferrer">
-                          CV
-                        </a>
-                      </u>{" "}
-                      /{" "}
-                      <a href="mailto:samarthdev138@gmail.com">
-                        <u>email</u>
-                      </a>{" "}
-                      /{" "}
-                      <a href="https://github.com/sdev138">
-                        <u>github</u>
-                      </a>{" "}
-                      /{" "}
-                      <a href="https://gitlab.com/samarthdev138">
-                        <u>gitlab</u>
-                      </a>{" "}
-                      /{" "}
-                      <a href="https://www.linkedin.com/in/samarth-dev">
-                        <u>linkedin</u>
-                      </a>{" "}
-                      /{" "}
-                      <a href="https://bsky.app/profile/samarthdev.bsky.social">
-                        <u>bluesky</u>
-                      </a>{" "}
-                      /{" "}
-                      <a href="https://x.com/chinnu_chan_">
-                        <u>twitter</u>
-                      </a>{" "}
-                      /{" "}
-                      <a href="https://scholar.google.com/citations?user=ByJ5jz4AAAAJ&hl=en">
-                        <u>google scholar</u>
-                      </a>
-                    </p>
-                  </div>
-                </div>
-                {/*  this is for col-6 */}
-                <div className="col-lg-6 image-container"></div>
+    <div className="site-shell" onClick={onLinkClick}>
+      <a className="skip-link" href="#content">Skip to content</a>
+      <header className="site-header">
+        <nav className="navigation" aria-label="Main navigation">
+          {navigation.map(({ href, label }) => {
+            const active = href === "/" ? path === href : path === href || path.startsWith(`${href}/`);
+            return (
+              <a key={href} href={href} className="navigation-link" aria-current={active ? "page" : undefined}>
+                <span className="menu-marker" aria-hidden="true" />
+                {label}
+              </a>
+            );
+          })}
+        </nav>
+        <div className="interface-rule" aria-hidden="true" />
+      </header>
+
+      <main id="content" tabIndex={-1}>
+        <div className="page-header">
+          <div className="cube-scene" aria-hidden="true">
+            <div className="cube-jump" ref={cube}>
+              <div className="cube">
+                {['front', 'back', 'right', 'left', 'top', 'bottom'].map((face) => (
+                  <span className={`cube-face cube-face--${face}`} key={face} />
+                ))}
               </div>
             </div>
+            <span className="cube-ground" />
           </div>
+          <h1 id="page-title" tabIndex={-1}>{page.title}</h1>
+          {page.description && <p className="page-description">{page.description}</p>}
         </div>
-      </section>
-      {/* Past the homepage. Here is the timeline or CV */}
-      {/* All of the content appears at the very left */}
-      <section id="experiences" className="experiences">
-        <Container className="About-header">
-          <Helmet>
-            <meta charSet="utf-8" />
-            <title> About | {meta.title}</title>
-            <meta name="description" content={meta.description} />
-          </Helmet>
-          {/* Education (University) */}
-          <div className="sec_sp">
-            <h3 className="color_sec">
-              <a
-                href="https://www.asu.edu"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                education
-              </a>
-            </h3>
-            {worktimeline.map((data, i) => {
-              return (
-                <div className="experience-entry" key={i}>
-                  <h5 className="experience-entry__title">{data.jobtitle}</h5>
-                  <p className="experience-entry__period">
-                    {data.where} &middot; {data.date}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-          {/* Work Experience */}
-          <div className="sec_sp">
-            <h3 className="color_sec">work experience</h3>
-            {workExperience.map((data, i) => {
-              return (
-                <div className="experience-entry" key={i}>
-                  <h5 className="experience-entry__title">{data.title}</h5>
-                  <p className="experience-entry__period">{data.period}</p>
-                  <p className="experience-entry__desc">{data.description}</p>
-                </div>
-              );
-            })}
-          </div>
-          {/* Research Experience */}
-          <div className="sec_sp">
-            <h3 className="color_sec">research experience</h3>
-            {researcherExperience.map((data, i) => {
-              return (
-                <div className="experience-entry" key={i}>
-                  <h5 className="experience-entry__title">{data.title}</h5>
-                  <p className="experience-entry__period">{data.period}</p>
-                  <p className="experience-entry__desc">{data.description}</p>
-                </div>
-              );
-            })}
-          </div>
-          {/* Volunteering Experience */}
-          <div className="sec_sp">
-            <h3 className="color_sec">volunteering</h3>
-            {volunteeringExperience.map((data, i) => {
-              return (
-                <div className="experience-entry" key={i}>
-                  <h5 className="experience-entry__title">{data.title}</h5>
-                  <p className="experience-entry__period">{data.period}</p>
-                  <p className="experience-entry__desc">{data.description}</p>
-                </div>
-              );
-            })}
-          </div>
-          {/* Research Interests */}
-          <div className="sec_sp">
-            <h3 className="color_sec">{dataabout.title}</h3>
-            <p className="experience-entry__desc">{dataabout.aboutme}</p>
-          </div>
-        </Container>
-      </section>
-      {/* Projects sections */}
-      <section id="projects" className="experiences">
-        <Container className="About-header">
-          <div className="projects-heading">
-            <h2 className="color_sec">projects</h2>
-          </div>
-          <div className="project-pods">
-            {dataportfolio.map((project) => (
-              <a
-                className="project-pod"
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                key={project.url}
-                aria-label={`Open ${project.title} project in a new tab`}
-              >
-                <div className="project-pod__content">
-                  <h3>{project.title}</h3>
-                  <p>{project.description}</p>
-                  <ul className="project-pod__tech">
-                    {project.technologies.map((tech) => (
-                      <li key={tech}>{tech}</li>
-                    ))}
-                  </ul>
-                </div>
-                <span className="project-pod__cta">
-                  <span>View project</span>
-                  <span className="project-pod__arrow" aria-hidden="true">
-                    &gt;
-                  </span>
-                </span>
-              </a>
-            ))}
-          </div>
-        </Container>
-      </section>
-      <br />
-      <br />
-      <p>{contactConfig.description}</p>
-      <br />
-      <br />
-      <br />
-    </HelmetProvider>
+
+        {path === "/" ? <Home /> :
+          path === "/work" ? <Work /> :
+          path === "/products" ? <Products /> :
+          path === "/blog" ? <Blog /> :
+          post ? <BlogPost post={post} /> : <NotFound />}
+      </main>
+
+      <footer className="site-footer">
+        {path === "/" ? <span>Samarth Dev</span> : (
+          <a href={post ? "/blog" : "/"}>
+            <span aria-hidden="true">← </span>{post ? "Back to blog" : "Back home"}
+          </a>
+        )}
+        <a href="mailto:samarthdev138@gmail.com">Get in touch <span aria-hidden="true">↗</span></a>
+      </footer>
+    </div>
   );
 }
 
