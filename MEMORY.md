@@ -1,5 +1,31 @@
 # Memory
 
+2026-09-29 — Match benji.org's full text presentation
+---
+- Samarth reported that the font/tracking-only changes were barely noticeable and requested a thorough rendered comparison with `https://benji.org/`. Markdown styling changes are explicitly permitted because the renderer inherits global CSS. No added tests, commits, pushes, or deployments were requested.
+- Compared actual browser styles, screenshots, font rendering, and shared-text metrics. The reference uses 14px/20px Inter at weight 460, `-0.09008px` tracking (`-0.00563rem`), #111 text, 14px/500-weight page headings, a 550px desktop reading column, 24px mobile gutters, and 16px paragraph gaps. The previous local text was 16px/28px at weight 400 with a 680px column and 30px headings.
+- Updated `devsamarth_v3/src/index.css` and `src/App.css` to use those type metrics, compact headings, paragraph/list spacing, matching secondary text, and consistent Inter labels/dates. Updated the current README/handoff with the typography baseline.
+- Matching the font-family name and CSS still produced differing glyph advances. An isolated browser comparison of the two variable Inter files confirmed the mismatch; both have a weight axis from 100–900. Replaced the local `public/inter-latin.woff2` with the reference's same Inter font build from `https://benji.org/_next/static/media/e4af272ccee01ff0-s.p.woff2`, retaining the existing Inter OFL. Font remains locally hosted. SHA-256: `c940764593d0fe5d596be327ca7558855e018039fb78509aa21921fd3644c3e4`.
+- Markdown prose inherits the new global size, weight, leading, tracking, and color. Its prose gaps and heading sizes were adjusted in `.markdown`; code keeps its utility font. Blog source text was not edited.
+- Verification: `bun run build` and `bun run lint` passed. Local Chromium verified Home, Work, Products, Blog, and `/blog/welcome` at 1440px, 768px, 580px, 390px, 320px, and 280px (30 page/viewport combinations): no overflow, browser errors, or prose metric mismatches. The actual loaded webfont is Inter; shared strings have identical measured advances to the reference. Reduced-motion behavior and navigation/history passed.
+- Verification evidence: `/tmp/opencode/typography-verification.json` and `/tmp/opencode/typography-final-*-1440.png` / `*-390.png` (ephemeral). Runtime checks were local; the reference was inspected read-only. Changes remain local and uncommitted.
+- Confirmed the production output contains the matching Inter font and current stylesheet in all five route entries. The task-owned local server on 5180 was stopped after verification.
+- Independent review found no Critical/Important issues. Its suggested uniform 500-weight headings were declined: the inspected reference actually uses 460 for list/section labels and 15px/600 and 14px/560 for article h1/h2, matching the intentional overrides here.
+- Reproduced the review's narrow-screen navigation finding: at 280px, the last button extended 7.2px beyond the reading column. Reduced navigation padding to 4px per side at widths up to 350px. Local Chromium confirmed all buttons stay inside the 24px gutters at 280px, 320px, 350px, and 390px. Final `bun run build` and `bun run lint` passed. Supplemental evidence: `/tmp/opencode/typography-navigation-verification.json` and `/tmp/opencode/typography-final-home-280.png` (ephemeral).
+
+2026-09-29 — Compact letter spacing
+---
+- Samarth requested the compact, document-like letter spacing of `https://benji.org/`. Inspected its rendered typography: Inter, 14px body text, and `-0.09008px` tracking (approximately `-0.0064em`).
+- Added `letter-spacing: -0.0064em` to the site body in `src/index.css`. Removed the expanded letter-spacing rules from page titles, navigation, section labels, and responsive navigation in `src/App.css` so they inherit the compact tracking.
+- Verified `bun run build` and `git diff --check`. Local Chromium confirmed compact spacing on all four main pages at 1440px, 390px, and 320px, with no overflow or browser errors. Screenshots: `/tmp/opencode/tight-tracking-1440.png` and `/tmp/opencode/tight-tracking-390.png` (ephemeral).
+- The task's local server on 5180 was stopped. Inter font changes from the preceding request remain in the working tree. No tests, commits, pushes, or deployments were added/performed for this change.
+
+2026-09-29 — Inter typography
+---
+- Samarth requested Inter as the website font. Replaced the primary font declaration and preload with locally hosted `public/inter-latin.woff2`, supporting weights 400–700. Replaced the obsolete Plex font assets with Inter and its SIL Open Font License, and updated the current README/handoff.
+- Verified `bun run build` and `git diff --check`. Local Chromium confirmed actual Inter webfont rendering on Home, Work, Products, and Blog at 1440px, 390px, and 320px, with no horizontal overflow or page errors.
+- Desktop/mobile screenshots: `/tmp/opencode/inter-1440.png` and `/tmp/opencode/inter-390.png` (ephemeral). The task-owned Bun/Vite server on 5180 was stopped. No tests added or commits/pushes/deployments performed for this font change.
+
 2026-09-29 — Cube diagonal direction corrected
 ---
 - Samarth requested upper-left-to-lower-right rotation and authorized a local commit without pushing. Changed the rotation axis in `devsamarth_v3/src/App.css` from `(1, 1, 0)` to `(-1, 1, 0)`.

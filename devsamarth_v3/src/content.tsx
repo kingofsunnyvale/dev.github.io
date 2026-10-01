@@ -67,7 +67,7 @@ const workExperience = [
     title: "Product Manager, Five9",
     period: "June 2026 - Present",
     description:
-      "Product Manager for AI Insights, GenAI Studio, Agent Assist, Knowledge Studio & Transcription Services. Revamped AI Insights with an entire new design and workflow. Handled customer feedback sessiosn and demos. Handled and resolved customer issues with sales, Technical Account Managers, and Professional Service personnel. Created different prototypes and features that would be groomed in AI Insights, GenAI Studio, and Knowledge Studio. Dictate necessary UI components and designs for each product. Created an automated dashboard for the Product Management org to handle OKRs and QBR prep, and led an initiative with two other Directors to standardize OKR metrics across the org for executive staff and the Board of Directors.",
+      "Product Manager for AI Insights, GenAI Studio, Agent Assist, Knowledge Studio & Transcription Services. Revamped AI Insights with an entire new design and workflow. Handled customer feedback sessiosn and demos. Handled and resolved customer issues with sales, Technical Account Managers, and Professional Service personnel. Created different prototypes and features that would be groomed in AI Insights, GenAI Studio, and Knowledge Studio. Dictate necessary UI components and designs for each product. Created an automated dashboard for the Product Management org to handle OKRs and QBR prep, and led an initiative with two other Senior Directors to standardize OKR metrics across the org for executive staff and the Board of Directors.",
   },
   {
     title: "Software Engineer, Five9",
