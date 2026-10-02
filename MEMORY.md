@@ -1,5 +1,12 @@
 # Memory
 
+2026-10-01 — Grey blog-entry descriptions
+---
+- Samarth requested that blog-list description metadata use the same grey as the homepage's “Product Manager @ Five9” subtitle.
+- Added `color: var(--text-muted)` to `.post-link p` in `devsamarth_v3/src/App.css`, reusing the homepage subtitle's existing color token.
+- Local Chromium reproduced the original mismatch and verified both blog-entry descriptions now match the subtitle's `rgba(0, 0, 0, 0.4)` color at 1440px and 390px, including hover. No browser errors; `bun run build` passed.
+- The task-owned verification server on 5180 was stopped after checking. No tests added or commits, pushes, or deployments performed.
+
 2026-09-29 — Match benji.org's full text presentation
 ---
 - Samarth reported that the font/tracking-only changes were barely noticeable and requested a thorough rendered comparison with `https://benji.org/`. Markdown styling changes are explicitly permitted because the renderer inherits global CSS. No added tests, commits, pushes, or deployments were requested.

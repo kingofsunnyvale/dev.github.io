@@ -140,7 +140,7 @@ main:focus, #page-title:focus { outline: none; }
 
 .post-link { display: flex; justify-content: space-between; gap: 24px; padding: 12px 0; text-decoration: none; }
 .post-link:hover { background: var(--surface); }
-.post-link p { margin-top: 4px; }
+.post-link p { margin-top: 4px; color: var(--text-muted); }
 .post-link time, .post-date { color: var(--text-muted); }
 .post-link time { white-space: nowrap; }
 .empty-blog { border-top: 1px solid var(--line); margin-top: 48px; padding-top: 24px; }
